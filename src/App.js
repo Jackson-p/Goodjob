@@ -1,19 +1,17 @@
 import React from 'react'
+import { addliao, decliao } from './index.redux'
+import { Button } from 'antd-mobile'
 
-
-
-
-const Jumao = (props) => {return <h2>{`my father is ${props.father}`}</h2>}
-class App extends React.Component{
-  render(){
-    const soul = 'liaoliao'
-    return (
-      <div>
-        <h1>124镇寝之魂{soul}</h1>
-        <Jumao father="wjp"/>
-      </div>
-    )
-  }
+export default class App extends React.Component{
+    render(){
+        const store = this.props.store
+        const num = store.getState()
+        return(
+            <div>
+                <h1>现在有{num}只liao</h1>
+                <Button type="primary" onClick={() => store.dispatch(addliao())} style={{"cursor":"pointer"}}>加liao</Button>
+                <Button type="primary" onClick={() => store.dispatch(decliao())} style={{"cursor":"pointer"}}>减liao</Button>
+            </div>
+        )
+    }
 }
-
-export default App
