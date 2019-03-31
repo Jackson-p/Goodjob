@@ -1,5 +1,3 @@
-import { createStore } from 'redux'
-
 const ADD_LIAO = "ADD_LIAO"
 const DEC_LIAO = "DEC_LIAO"
 //action
@@ -23,4 +21,6 @@ export function adjustLiao(state=0,action){
     }
 }
 
-export const store = createStore(adjustLiao)
+export function asyncAddliao(){
+    return (dispatch) => setTimeout(() => dispatch(addliao()),1000)
+}
