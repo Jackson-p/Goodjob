@@ -16,7 +16,7 @@ export function adjustLiao(state=0,action){
         case DEC_LIAO:
             return state-1
         default:
-            console.log('state initialed')
+            //console.log('state initialed')
             return state
     }
 }
