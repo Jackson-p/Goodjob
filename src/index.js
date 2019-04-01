@@ -1,33 +1,34 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDom from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import {
-    BrowserRouter,
-    Route,
-    Switch,
-    Redirect
-} from 'react-router-dom'
-import Reducers from './reducers'
-import Dashboard from './Dashboard';
-import Auth from './Auth' 
+import { BrowserRouter, Route } from 'react-router-dom'
 
+import Login from './container/login/login'
+import Register from './container/register/register'
+import AuthRoute from './component/authroute/authroute'
+import reducers from './reducer'
+import './config'
+import './index.css'
 
-const store = createStore(Reducers, compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__?window.__REDUX_DEVTOOLS_EXTENSION__():()=>console.log('no redux tool')
+const store = createStore(reducers, compose(
+	applyMiddleware(thunk),
+	window.__REDUX_DEVTOOLS_EXTENSION__?window.__REDUX_DEVTOOLS_EXTENSION__():f=>f
 ))
-
-ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <Switch>
-                <Route path='/login' component={Auth} />
-                <Route path='/dashboard' component={Dashboard} />
-                <Redirect to='/login' />
-            </Switch>
-        </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
+function Boss(){
+	return <h2>BOSS页面</h2>
+}
+ReactDom.render(
+	(<Provider store={store}>
+		<BrowserRouter>
+			<div>
+				<AuthRoute></AuthRoute>
+				<Route path='/boss' component={Boss}></Route>
+				<Route path='/login' component={Login}></Route>
+				<Route path='/register' component={Register}></Route>
+			</div>
+		</BrowserRouter>
+	</Provider>),
+	document.getElementById('root')
 )

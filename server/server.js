@@ -1,14 +1,16 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
-const app =express()
+const userRouter = require('./user')
 
-app.get('/',function(req, res){
-    return res.write('<h1>Hello World</h1>')
+const app = express()
+app.use(cookieParser())
+app.use(bodyParser.json())
+app.use('/user',userRouter)
+app.listen(9093,function(){
+	console.log('Node app start at port 9093')
 })
 
-app.get('/data',function(req, res){
-    return res.json({name:'liao', age:10})
-})
-app.listen(9093, function(){
-    console.log('Server begin at 9093')
-})
+
+
